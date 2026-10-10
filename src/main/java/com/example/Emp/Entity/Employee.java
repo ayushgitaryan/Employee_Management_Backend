@@ -1,7 +1,6 @@
 package com.example.Emp.Entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -14,9 +13,14 @@ public class Employee {
 
     private String firstName;
     private String lastName;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
     private String phone;
     private String department;
+    private String designation;
+    private String employmentStatus;
     private Double salary;
     private LocalDate joiningDate;
 
@@ -29,6 +33,20 @@ public class Employee {
         this.email = email;
         this.phone = phone;
         this.department = department;
+        this.salary = salary;
+        this.joiningDate = joiningDate;
+        this.designation = "Software Engineer";
+        this.employmentStatus = "ACTIVE";
+    }
+
+    public Employee(String firstName, String lastName, String email, String phone, String department, String designation, String employmentStatus, Double salary, LocalDate joiningDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.department = department;
+        this.designation = designation;
+        this.employmentStatus = employmentStatus;
         this.salary = salary;
         this.joiningDate = joiningDate;
     }
@@ -83,6 +101,22 @@ public class Employee {
         this.department = department;
     }
 
+    public String getDesignation() {
+        return designation != null ? designation : "Software Engineer";
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getEmploymentStatus() {
+        return employmentStatus != null ? employmentStatus : "ACTIVE";
+    }
+
+    public void setEmploymentStatus(String employmentStatus) {
+        this.employmentStatus = employmentStatus;
+    }
+
     public Double getSalary() {
         return salary;
     }
@@ -90,12 +124,12 @@ public class Employee {
     public void setSalary(Double salary) {
         this.salary = salary;
     }
-    public LocalDate getJoiningDate(){
+
+    public LocalDate getJoiningDate() {
         return joiningDate;
     }
 
-    public void setJoiningDate(LocalDate joiningDate){
+    public void setJoiningDate(LocalDate joiningDate) {
         this.joiningDate = joiningDate;
     }
 }
-

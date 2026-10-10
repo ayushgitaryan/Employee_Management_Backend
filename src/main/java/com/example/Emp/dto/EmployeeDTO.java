@@ -1,7 +1,6 @@
 package com.example.Emp.dto;
 
 import jakarta.validation.constraints.*;
-
 import java.time.LocalDate;
 
 public class EmployeeDTO {
@@ -24,6 +23,9 @@ public class EmployeeDTO {
     @NotBlank(message = "Department is required")
     private String department;
 
+    private String designation;
+    private String employmentStatus;
+
     @NotNull(message = "Salary is required")
     @Positive(message = "Salary must be greater than zero")
     private Double salary;
@@ -31,9 +33,6 @@ public class EmployeeDTO {
     @NotNull(message = "Joining date is required")
     @PastOrPresent(message = "Joining date cannot be in the future")
     private LocalDate joiningDate;
-
-
-    // ---- Constructors ----
 
     public EmployeeDTO() {
     }
@@ -45,6 +44,21 @@ public class EmployeeDTO {
         this.email = email;
         this.phone = phone;
         this.department = department;
+        this.salary = salary;
+        this.joiningDate = joiningDate;
+        this.designation = "Software Engineer";
+        this.employmentStatus = "ACTIVE";
+    }
+
+    public EmployeeDTO(Long id, String firstName, String lastName, String email, String phone, String department, String designation, String employmentStatus, Double salary, LocalDate joiningDate) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.department = department;
+        this.designation = designation;
+        this.employmentStatus = employmentStatus;
         this.salary = salary;
         this.joiningDate = joiningDate;
     }
@@ -66,14 +80,14 @@ public class EmployeeDTO {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String firstName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 
     public String getEmail() {
         return email;
@@ -82,10 +96,12 @@ public class EmployeeDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getPhone(){
+
+    public String getPhone() {
         return phone;
     }
-    public void setPhone(String phone){
+
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -97,6 +113,22 @@ public class EmployeeDTO {
         this.department = department;
     }
 
+    public String getDesignation() {
+        return designation != null ? designation : "Software Engineer";
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getEmploymentStatus() {
+        return employmentStatus != null ? employmentStatus : "ACTIVE";
+    }
+
+    public void setEmploymentStatus(String employmentStatus) {
+        this.employmentStatus = employmentStatus;
+    }
+
     public Double getSalary() {
         return salary;
     }
@@ -104,12 +136,12 @@ public class EmployeeDTO {
     public void setSalary(Double salary) {
         this.salary = salary;
     }
-    public LocalDate getJoiningDate(){
+
+    public LocalDate getJoiningDate() {
         return joiningDate;
     }
-    public void setJoiningDate(LocalDate joiningDate){
+
+    public void setJoiningDate(LocalDate joiningDate) {
         this.joiningDate = joiningDate;
     }
-
-
 }

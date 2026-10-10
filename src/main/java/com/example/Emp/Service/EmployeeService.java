@@ -19,4 +19,8 @@ public interface EmployeeService {
     Page<EmployeeDTO> searchEmployees(String department, String firstName, Double minSalary, Pageable pageable);
 
     void deleteEmployee(Long id);
+
+    EmployeeDTO getEmployeeByUsername(String username);
+
+    com.example.Emp.Entity.Employee getEmployeeEntityByUsername(String username);
 }

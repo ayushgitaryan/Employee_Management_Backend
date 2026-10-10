@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     boolean existsByEmail(String email);
+    java.util.Optional<Employee> findByEmail(String email);
 
     Page<Employee> findByDepartment(String department , Pageable pageable);
 

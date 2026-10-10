@@ -81,6 +81,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         dto.setEmail(employee.getEmail());
         dto.setPhone(employee.getPhone());
         dto.setDepartment(employee.getDepartment());
+        dto.setDesignation(employee.getDesignation());
+        dto.setEmploymentStatus(employee.getEmploymentStatus());
         dto.setSalary(employee.getSalary());
         dto.setJoiningDate(employee.getJoiningDate());
         return dto;
@@ -93,6 +95,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setEmail(dto.getEmail());
         employee.setPhone(dto.getPhone());
         employee.setDepartment(dto.getDepartment());
+        employee.setDesignation(dto.getDesignation());
+        employee.setEmploymentStatus(dto.getEmploymentStatus());
         employee.setSalary(dto.getSalary());
         employee.setJoiningDate(dto.getJoiningDate());
         return employee;
@@ -112,5 +116,31 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         return employeePage.map(this::mapToDTO);
+    }
+
+    @Override
+    public Employee getEmployeeEntityByUsername(String username) {
+        return employeeRepository.findByEmail(username)
+                .orElseGet(() -> {
+                    // Create default employee profile linked to user username if not yet created
+                    Employee emp = new Employee(
+                            username,
+                            "User",
+                            username,
+                            "555-0100",
+                            "General",
+                            "Software Engineer",
+                            "ACTIVE",
+                            65000.0,
+                            java.time.LocalDate.now()
+                    );
+                    return employeeRepository.save(emp);
+                });
+    }
+
+    @Override
+    public EmployeeDTO getEmployeeByUsername(String username) {
+        Employee employee = getEmployeeEntityByUsername(username);
+        return mapToDTO(employee);
     }
 }
